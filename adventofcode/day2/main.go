@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 )
 
-func roundScore(round string) (int, bool) {
+func roundScore(round string) int {
 	var pairs = map[string]int{
 		"A X": 4,
 		"A Y": 8,
@@ -17,33 +19,23 @@ func roundScore(round string) (int, bool) {
 		"C Z": 6,
 	}
 	if res, ok := pairs[round]; ok {
-		return res, true
+		return res
 	}
 	fmt.Println("Something go wrong. Try to enter the round again")
-	return 0, false
+	return 0
 }
 
 func main() {
-	var res, N int
-	fmt.Println("How many rounds were played?")
-	_, err := fmt.Scanln(&N)
-	if err != nil {
-		return
-	}
+	var res int
+	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Enter your rounds:")
-	for i := 0; i < N; i++ {
-		var player1, player2 string
-		_, err1 := fmt.Scan(&player1)
-		_, err2 := fmt.Scan(&player2)
-		if err1 != nil || err2 != nil {
-			return
-		}
-
-		score, flag := roundScore(player1 + " " + player2)
-		if flag {
-			res += score
+	for {
+		scanner.Scan()
+		round := scanner.Text()
+		if len(round) != 0 {
+			res += roundScore(round)
 		} else {
-			i--
+			break
 		}
 	}
 	fmt.Println(res)
