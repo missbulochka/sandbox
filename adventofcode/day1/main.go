@@ -1,34 +1,52 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 func main() {
-	var N int
+	inventory := make([]int, 1)
+	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("How many elves on the team have inventory?")
-	_, err := fmt.Scanln(&N)
-	if err != nil {
-		return
-	}
-
-	inventory := make([]int, N)
 	fmt.Println("Enter Elves list")
-	for i := 0; i < N; i++ {
-		var res int
-		for err2 := err; err2 == nil; {
-			inventory[i] += res
-			_, err2 = fmt.Scanln(&res)
+	for flag, index := false, 0; ; {
+		res, err := reader.ReadString('\n')
+		if err != nil {
+			break
 		}
+
+		if res == "\n" {
+			if flag {
+				break
+			} else {
+				flag = true
+				continue
+			}
+		}
+		if flag {
+			flag = false
+			inventory = append(inventory, 0)
+			index++
+		}
+
+		res = res[:len(res)-1]
+		ires, err := strconv.Atoi(res)
+		if err != nil {
+			break
+		}
+		inventory[index] += ires
 	}
 
 	var iMax, max int
-
-	for i := 0; i < N; i++ {
+	for i := 0; i < len(inventory)-1; i++ {
 		if inventory[i] > max {
 			max = inventory[i]
 			iMax = i
 		}
-	}
 
-	fmt.Printf("Elve %v carrying the most (%v) Calories\n", iMax, max)
+	}
+	fmt.Printf("\nElve %v carrying the most (%v) Calories\n", iMax, max)
 }
