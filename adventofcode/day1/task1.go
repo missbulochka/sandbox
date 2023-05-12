@@ -40,13 +40,31 @@ func main() {
 		inventory[index] += ires
 	}
 
-	var iMax, max int
-	for i := 0; i < len(inventory)-1; i++ {
-		if inventory[i] > max {
-			max = inventory[i]
-			iMax = i
+	var iminMax, minMax int
+	var imidMax, midMax int
+	var imaxMax, maxMax int
+	for i := 0; i < len(inventory); i++ {
+		if inventory[i] > minMax {
+			minMax = inventory[i]
+			iminMax = i + 1
+		} else {
+			continue
+		}
+		if inventory[i] > midMax {
+			minMax = midMax
+			midMax = inventory[i]
+			iminMax = imidMax
+			imidMax = i + 1
+		} else {
+			continue
+		}
+		if inventory[i] > maxMax {
+			midMax = maxMax
+			maxMax = inventory[i]
+			imidMax = imaxMax
+			imaxMax = i + 1
 		}
 
 	}
-	fmt.Printf("\nElve %v carrying the most (%v) Calories\n", iMax, max)
+	fmt.Printf("\nElves %v, %v and %v are carrying %v Calories\n", iminMax, imidMax, imaxMax, minMax+midMax+maxMax)
 }
