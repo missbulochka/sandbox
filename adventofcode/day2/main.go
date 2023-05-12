@@ -25,6 +25,25 @@ func roundScore(round string) int {
 	return 0
 }
 
+func secretStrategy(round string) int {
+	var pairs = map[string]int{
+		"A X": 3,
+		"A Y": 4,
+		"A Z": 8,
+		"B X": 1,
+		"B Y": 5,
+		"B Z": 9,
+		"C X": 2,
+		"C Y": 6,
+		"C Z": 7,
+	}
+	if res, ok := pairs[round]; ok {
+		return res
+	}
+	fmt.Println("Something go wrong. Try to enter the round again")
+	return 0
+}
+
 func main() {
 	var res int
 	scanner := bufio.NewScanner(os.Stdin)
@@ -33,7 +52,7 @@ func main() {
 		scanner.Scan()
 		round := scanner.Text()
 		if len(round) != 0 {
-			res += roundScore(round)
+			res += secretStrategy(round)
 		} else {
 			break
 		}
