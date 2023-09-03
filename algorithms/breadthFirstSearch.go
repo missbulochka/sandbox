@@ -18,26 +18,17 @@ func makeGraph() map[uint8][]uint8 {
 	return graph
 }
 
-func findInSearched(searched []uint8, node uint8) bool {
-	for _, el := range searched {
-		if el == node {
-			return true
-		}
-	}
-	return false
-}
-
 func BFS(graph map[uint8][]uint8, start, end uint8) bool {
 	var queue []uint8
-	var searched []uint8
+	searched := make(map[uint8]bool)
 	queue = append(queue, graph[start]...)
 
 	for len(queue) > 0 {
-		if !findInSearched(searched, queue[0]) {
+		if !searched[queue[0]] {
 			if queue[0] == end {
 				return true
 			} else {
-				searched = append(searched, queue[0])
+				searched[queue[0]] = true
 				queue = append(queue, graph[queue[0]]...)
 			}
 		}
