@@ -2,7 +2,7 @@
 
 ## Description
 
-Merge is an efficient sort algorithm.
+Merge sort is an efficient sort algorithm.
 Efficiency in the best, average and worst case is **O(n log n)**.
 
 ## Algorithm
