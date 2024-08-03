@@ -3,7 +3,7 @@
 ## Description
 
 Quick sort is an efficient sort algorithm.
-The best and average case efficiency is O(n log n) but the worst case O(n^2)
+The best and average case efficiency is **O(n log n)** but the worst case **O(n^2)**
 (if the pivot for each sequence will be its last element).
 
 ## Algorithm
