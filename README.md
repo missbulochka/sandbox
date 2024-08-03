@@ -6,4 +6,5 @@ This project is for experiments.
 The `algorithms` directory contains well-known efficient algorithms implemented in Golang.
 
 The following algorithms have been implemented:
-* binary search
+*   binary search
+*   quick sort
